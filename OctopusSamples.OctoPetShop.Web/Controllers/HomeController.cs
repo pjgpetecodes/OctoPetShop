@@ -8,10 +8,9 @@ using OctopusSamples.OctoPetShop.Models;
 
 namespace OctopusSamples.OctoPetShop.Controllers
 {
-    public class HomeController : Microsoft.AspNetCore.Mvc.Controller
+    public class HomeController : Controller
     {
         private readonly IProductClient _productClient;
-        private static ShoppingCartViewModel shoppingCartViewModel;
 
         public HomeController(IProductClient productClient)
         {
@@ -21,7 +20,6 @@ namespace OctopusSamples.OctoPetShop.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _productClient.GetAsync(CancellationToken.None);
-            shoppingCartViewModel = new ShoppingCartViewModel();
             return View(products);
         }
 
@@ -40,36 +38,26 @@ namespace OctopusSamples.OctoPetShop.Controllers
             return View();
         }
 
-        public IActionResult Confirmation()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
 
-        public IActionResult ShoppingCart()
+        public async Task<IActionResult> ShoppingCart()
         {
+            var products = await _productClient.GetAsync(CancellationToken.None);
+            
+            var shoppingCartViewModel = new ShoppingCartViewModel();
+            shoppingCartViewModel.CartItems.Add(products.First());
             
             return View(shoppingCartViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int id)
+        public IActionResult AddToCart(int id)
         {
-            var products = await _productClient.GetAsync(CancellationToken.None);
-
-            var productItemSearch = from product in products
-                                    where product.Id == id
-                                    select product;
-
-            var productItem = productItemSearch.First();
-
-            shoppingCartViewModel.CartItems.Add(productItem);
-
+            // TODO: Call Cart Service and Save Items 
             return RedirectToAction("ShoppingCart");
         }
         
@@ -77,16 +65,8 @@ namespace OctopusSamples.OctoPetShop.Controllers
         public IActionResult Checkout(ShoppingCartViewModel cart)
         {
             // TODO: Redirect to Order Confirmation / Thank you page 
-            shoppingCartViewModel.CartItems.Clear();
-
-            return RedirectToAction("Confirmation");
+            return RedirectToAction("ShoppingCart");
         }
-
-        [HttpPost]
-        public IActionResult Finish()
-        {
-            return RedirectToAction("");
-        }
-
+        
     }
 }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -26,24 +25,12 @@ namespace OctopusSamples.ShoppingCartService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<OctopusSamples.OctoPetShop.ShoppingCartService.EnvironmentConfig>(Configuration);
-
-            services.AddMvcCore(options =>
-            {
-                options.RequireHttpsPermanent = true; //does not affect API requests
-                options.RespectBrowserAcceptHeader = true; //false by default
-            })
-           .AddApiExplorer()
-           .AddFormatterMappings()
-           .AddNewtonsoftJson()
-           .AddCacheTagHelper()
-           .AddDataAnnotations()
-           .AddAuthorization()
-           .AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -54,17 +41,9 @@ namespace OctopusSamples.ShoppingCartService
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseRouting();
-
             if (System.Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == null)
                 app.UseHttpsRedirection();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-            });
-
+            app.UseMvc();
         }
     }
 }
