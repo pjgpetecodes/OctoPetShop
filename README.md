@@ -16,7 +16,7 @@ Octopus Pet Shop Example Web app written in .NET Core.  This solution consists o
 - When debugging in Visual Studio 2022 without Docker Compose;
 
     - Install SQL Server 2019 upwards.
-    - Create a database named ops
+    - Create a database named OctoPetShop
     - Add the connection string for the database to the OctopusSamples.OctoPetShop.Database Project;
         - Right click on the `Database` Project
         - Click Properties
@@ -25,5 +25,5 @@ Octopus Pet Shop Example Web app written in .NET Core.  This solution consists o
         - Enter a connection string in the following format, remembering to escape the `=` characters;
 
 ```
-dbUpConnectionString=Data Source/=.\SQLEXPRESS;Integrated Security/=True;Connect Timeout/=30;Encrypt/=False;TrustServerCertificate/=False;ApplicationIntent/=ReadWrite;MultiSubnetFailover/=False;Database/=ops
+dbUpConnectionString=Data Source/=.\SQLEXPRESS;Integrated Security/=True;Connect Timeout/=30;Encrypt/=False;TrustServerCertificate/=False;ApplicationIntent/=ReadWrite;MultiSubnetFailover/=False;Database/=OctoPetShop
 ```
