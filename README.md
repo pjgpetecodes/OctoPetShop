@@ -27,3 +27,22 @@ Octopus Pet Shop Example Web app written in .NET Core.  This solution consists o
 ```
 dbUpConnectionString=Data Source/=.\SQLEXPRESS;Integrated Security/=True;Connect Timeout/=30;Encrypt/=False;TrustServerCertificate/=False;ApplicationIntent/=ReadWrite;MultiSubnetFailover/=False;Database/=OctoPetShop
 ```
+
+- To debug using Docker direct from VS2022;
+    - Install Docker Desktop
+    - Select "docker-compose" from the "Startup Projects dropdown"
+    - Run the project
+
+- To provision to a local Kubernetes Cluster;
+    - Install Docker Desktop
+    - Enable Kubernetes in Docker Desktop
+    - Build the Docker Images from the solution root directory with `BuildDockerImages.ps1 <domain>`
+    - Push the Docker images to DockerHub with `PushToDockerHub.ps1 <domain>`
+    - To test that the Docker images function correctly, you can use `RunDockerImages.ps1 <domain>`
+    - To create a Kubernetes Cluster using a LoadBalancer;
+        - Run `kubectl apply -f k8s` and access at http://localhost:5000
+    - To create a Kubernetes Cluster using an Ingress Service;
+        - Install Helm with `choco install kubernetes-helm`
+        - Install the Helm Ingress Controller with `helm upgrade --install ingress-nginx ingress-nginx  --repo https://kubernetes.github.io/ingress-nginx  --namespace ingress-nginx --create-namespace`
+        - Run `kubectl apply -f k8s-ingress` and access at http://localhost
+
