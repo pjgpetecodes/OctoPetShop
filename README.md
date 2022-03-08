@@ -43,7 +43,7 @@ dbUpConnectionString=Data Source/=.\SQLEXPRESS;Integrated Security/=True;Connect
     - To test that the Docker images function correctly, you can use `RunDockerImages.ps1 <domain>`
     - To create a Kubernetes Cluster using a LoadBalancer;
         - Run `kubectl apply -f k8s` and access at http://localhost:5000
-    - To create a Kubernetes Cluster using an Ingress Service;
+    - To create a Kubernetes Cluster using an Ingress Service *(Note: If you have IIS on your machine, you may need to stop it as the Ingress Service requires port 80)*;
         - Install Helm with `choco install kubernetes-helm`
         - Install the Helm Ingress Controller with `helm upgrade --install ingress-nginx ingress-nginx  --repo https://kubernetes.github.io/ingress-nginx  --namespace ingress-nginx --create-namespace`
         - Run `kubectl apply -f k8s-ingress` and access at http://localhost
