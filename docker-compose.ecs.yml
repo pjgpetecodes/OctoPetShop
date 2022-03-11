@@ -6,8 +6,6 @@ services:
     environment:
       - OPSConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
     image: pjgcreations/octopetshop-productservice
-    depends_on: 
-      - "database"
     networks:
       - octonet
 
@@ -16,8 +14,6 @@ services:
     image: pjgcreations/octopetshop-shoppingcartservice
     environment:
       - OPSConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
-    depends_on: 
-      - "database"
     networks:
       - octonet
 
@@ -36,13 +32,13 @@ services:
     networks:
       - octonet
 
-  database:
-    container_name: database
-    environment:
-      - DbUpConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
-    image: pjgcreations/octopetshop-database
-    networks:
-      - octonet
-      
+#  database:
+#    container_name: database
+#    environment:
+#      - DbUpConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
+#    image: pjgcreations/octopetshop-database
+#    networks:
+#      - octonet
+
 networks:
   octonet:

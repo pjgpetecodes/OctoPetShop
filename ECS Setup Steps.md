@@ -1,0 +1,16 @@
+- Create ECS Instance
+- Create RDS SQL Server 2019
+    - Database name "OctoPetShop"
+    - Allow Public Access from advanced Networking
+    - Add Inbound IP Anywhere Access 
+        - Click "Default" inbound Security group in "Security Group Settings"
+        - Click "Inbound Rules" tab at the bottom of the screen
+        - Click "Edit Inbound Rules" button
+        - Delete existing Rule
+        - Add a new Rule
+        - Select "MSSQL" from Type drop down
+        - Select "Anywhere-IPv4" from Source
+        - Enter "Allow Public MSSQL Access" as the description
+        - Click Save Rules
+    - Retrieve Connetion String DNS;
+        - Endpoint from "Connectivity and Security" section.
