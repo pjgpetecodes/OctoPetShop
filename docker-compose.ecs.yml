@@ -5,13 +5,13 @@ services:
     container_name: productservice
     environment:
       - OPSConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
-    image: pjgcreations/octopetshop-productservice
+    image: octopustestaccount/octopetshop-productservice
     networks:
       - octonet
 
   shoppingcartservice:
     container_name: shoppingcartservice
-    image: pjgcreations/octopetshop-shoppingcartservice
+    image: octopustestaccount/octopetshop-shoppingcartservice
     environment:
       - OPSConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
     networks:
@@ -19,7 +19,7 @@ services:
 
   web:
     container_name: web
-    image: pjgcreations/octopetshop-web
+    image: octopustestaccount/octopetshop-web
     environment:
       - ProductServiceBaseUrl=http://productservice
       - ShoppingCartServiceBaseUrl=http://shoppingcartservice
@@ -36,7 +36,7 @@ services:
 #    container_name: database
 #    environment:
 #      - DbUpConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
-#    image: pjgcreations/octopetshop-database
+#    image: octopustestaccount/octopetshop-database
 #    networks:
 #      - octonet
 
