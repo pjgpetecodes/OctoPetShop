@@ -14,6 +14,27 @@ Octopus Pet Shop Example Web app written in .NET Core.  This solution consists o
 - SQL Server image has not been configured with a persistent volume claim, you will lose your data if you re-create your Kubernetes cluster.
 - When using Octopus Deploy to deploy the .yaml files to a Kubernetes cluster, be sure that the octopetshop-database-job.yaml is run AFTER both octopetshop-sqlserver-cluster-ip-service.yaml and octopetshop-sql-deployment.yaml.
 
+# Pushing to Docker Hub
+
+Assuming you've installed docker desktop;
+
+- Create the following repositories in Docker hub
+    - octopetshop-web
+    - octopetshop-productservice
+    - octopetshop-shoppingcartservice
+    - octopetshop-database
+- Login to Docker Hub from the powershell with;
+
+    `docker login --username <accountname>`
+
+- Build the Docker Images with;
+
+    `.\BuildDockerImages.ps1 <accountname>`
+
+- Push the Images to Docker Hub with;
+
+    `.\PushToDockerHub.ps1 <accountname>`
+
 # Debugging
 - When debugging in Visual Studio 2022 without Docker Compose;
 
@@ -32,7 +53,7 @@ dbUpConnectionString=Data Source/=.\SQLEXPRESS;Integrated Security/=True;Connect
 
 - To debug using Docker direct from VS2022;
     - Install Docker Desktop
-    - Select "docker-compose" from the "Startup Projects dropdown"
+    - Select "docker-compose" from the "Startup Projects" dropdown
     - Run the project
 
 - To provision to a local Kubernetes Cluster;
