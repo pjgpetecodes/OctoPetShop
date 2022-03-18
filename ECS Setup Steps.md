@@ -1,3 +1,5 @@
+- Create IAM Role for CloudFormation
+    - IAM > Roles > Create Role > AWS Service > Use Case > CloudFormation > Search for CloudFormation > Select AWSCloudFormationFullAccess > Name Role > Create Role
 - Create ECS Instance
 - Create RDS SQL Server 2019
     - Database name "OctoPetShop"
@@ -14,3 +16,16 @@
         - Click Save Rules
     - Retrieve Connetion String DNS;
         - Endpoint from "Connectivity and Security" section.
+
+
+
+AmazonEC2FullAccess
+IAMFullAccess
+AutoScalingFullAccess
+ElasticLoadBalancingFullAccess
+AWSCloudMapFullAccess
+CloudWatchLogsFullAccess
+AmazonECS_FullAccess
+AWSApplicationDiscoveryServiceFullAccess
+AmazonRoute53FullAccess
+AWSCloudFormationFullAccess 
