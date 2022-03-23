@@ -69,3 +69,12 @@ dbUpConnectionString=Data Source/=.\SQLEXPRESS;Integrated Security/=True;Connect
         - Install the Helm Ingress Controller with `helm upgrade --install ingress-nginx ingress-nginx  --repo https://kubernetes.github.io/ingress-nginx  --namespace ingress-nginx --create-namespace`
         - Run `kubectl apply -f k8s-ingress` and access at http://localhost
 
+# Notes
+
+If you get an error from the docker containers saying that it cannot find the right version of .NET 6, you may need to run;
+
+```
+docker pull mcr.microsoft.com/dotnet/runtime:6.0
+docker pull mcr.microsoft.com/dotnet/sdk:6.0
+
+Then rebuild the docker images.
