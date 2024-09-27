@@ -1,0 +1,12 @@
+version: '3.4'
+
+#
+# Run this script before the primary ECS script to configure the database
+#
+
+services:
+  database:
+    container_name: database
+    environment:
+      - DbUpConnectionString=Data Source=octopetshop.czackpbhxo2c.us-east-1.rds.amazonaws.com;Initial Catalog=OctoPetShop; User ID=admin; Password=OctopusDeploy_1234
+    image: octopustestaccount/octopetshop-database

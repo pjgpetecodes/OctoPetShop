@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates an AWS ECS Instance
+Parameters:
+  ECSClusterName:
+    NoEcho: 'false'
+    Description: ECS Cluster Name
+    Type: String
+    Default: OctoPetShopCluster
+    MinLength: '1'
+    MaxLength: '63'
+    AllowedPattern: "[a-zA-Z][a-zA-Z0-9]*"
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+    - Label:
+        default: ECS Cluster Name
+      Parameters:
+        - ECSClusterName
+      ParameterLabels:
+        ECSClusterName:
+            default: Cluster Name
+Resources:
+ ECSCluster:
+  Type: 'AWS::ECS::Cluster'
+  Properties:
+    ClusterName: 
+      Ref: ECSClusterName
